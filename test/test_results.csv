@@ -1,0 +1,4 @@
+Temperature,Voltage,Current,State,Result
+30,12.1,1.2,NORMAL,PASS
+42,12.0,1.3,WARNING,PASS
+52,11.8,1.5,CRITICAL,PASS
