@@ -1,0 +1,23 @@
+# System Documentation
+
+## Overview
+The system monitors battery temperature, voltage, and current to ensure safe operation and prevent overheating.
+
+## Architecture
+Battery → Sensors → Arduino → Decision Logic → Outputs (Fan, LCD, Buzzer)
+
+## State Machine
+- NORMAL: Safe operation
+- WARNING: Cooling activated
+- CRITICAL: Alert + protection
+
+## Working Principle
+1. Sensors collect data
+2. Data processed by Arduino
+3. State updated using thresholds
+4. Outputs triggered accordingly
+
+## Safety Features
+- Over-temperature protection
+- Fault detection (sensor failure)
+- Alert system (buzzer + LED)
