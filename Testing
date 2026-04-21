@@ -1,0 +1,21 @@
+# Test Cases
+
+## Test Case 1: Normal Condition
+Input: Temp = 30°C  
+Expected: NORMAL state, all outputs OFF  
+Result: PASS  
+
+## Test Case 2: Warning Condition
+Input: Temp = 42°C  
+Expected: Fan ON, LED ON  
+Result: PASS  
+
+## Test Case 3: Critical Condition
+Input: Temp = 52°C  
+Expected: Fan ON, Buzzer ON, LED ON  
+Result: PASS  
+
+## Test Case 4: Sensor Failure
+Input: No sensor data  
+Expected: Buzzer ON, error message  
+Result: PASS  
