@@ -1,0 +1,40 @@
++------------------+
+|     BATTERY      |
+|   (12V Li-ion)   |
++--------+---------+
+         |
+         v
++------------------------+
+|        SENSORS         |
+|------------------------|
+| DHT11  → Temperature   |
+| Voltage Sensor → Volt  |
+| Current Sensor → Curr  |
++--------+---------------+
+         |
+         v
++------------------------+
+|   ARDUINO UNO (MCU)    |
+|------------------------|
+| - Sensor Processing    |
+| - FSM Logic            |
+| - Hysteresis Control   |
+| - Fault Detection      |
++----+---------+---------+
+     |         |         
+     |         |         
+     v         v         
++--------+   +----------------+
+|  LCD   |   |   ACTUATORS    |
+| Display|   |----------------|
+|        |   | Relay → Fan    |
+|        |   | Buzzer         |
+|        |   | LED            |
++--------+   +----------------+
+     |
+     v
++------------------------+
+|   SERIAL MONITOR /     |
+|   DATA LOGGING         |
+| (Power BI Analysis)    |
++------------------------+
