@@ -1,0 +1,179 @@
+#include <DHT.h>
+#include <LiquidCrystal.h>
+
+// ---------------- PIN CONFIG ----------------
+#define DHTPIN 2
+#define DHTTYPE DHT11
+
+#define VOLTAGE_PIN A0
+#define CURRENT_PIN A1
+
+#define RELAY_PIN 7
+#define BUZZER_PIN 8
+#define LED_PIN 9
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 6);
+DHT dht(DHTPIN, DHTTYPE);
+
+// ---------------- STATE MACHINE ----------------
+enum SystemState {
+  NORMAL,
+  WARNING,
+  CRITICAL
+};
+
+SystemState currentState = NORMAL;
+
+// ---------------- THRESHOLDS ----------------
+float warningOn = 40;
+float warningOff = 35;
+
+float criticalOn = 50;
+float criticalOff = 45;
+
+// ---------------- TIMING ----------------
+unsigned long lastReadTime = 0;
+const long interval = 2000;
+
+// ---------------- FAULT ----------------
+bool sensorFault = false;
+
+// ---------------- SETUP ----------------
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(RELAY_PIN, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+
+  lcd.begin(16, 2);
+  dht.begin();
+
+  lcd.print("BMS Initializing");
+  delay(2000);
+  lcd.clear();
+}
+
+// ---------------- MAIN LOOP ----------------
+void loop() {
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - lastReadTime >= interval) {
+    lastReadTime = currentMillis;
+
+    float temp = readTemperature();
+    float volt = readVoltage();
+    float curr = readCurrent();
+
+    if (sensorFault) {
+      handleFault();
+      return;
+    }
+
+    updateState(temp);
+    handleState();
+    displayData(temp, volt, curr);
+    logData(temp, volt, curr);
+  }
+}
+
+// ---------------- SENSOR FUNCTIONS ----------------
+float readTemperature() {
+  float temp = dht.readTemperature();
+
+  if (isnan(temp)) {
+    sensorFault = true;
+    return 0;
+  }
+
+  sensorFault = false;
+  return temp;
+}
+
+float readVoltage() {
+  int raw = analogRead(VOLTAGE_PIN);
+  return (raw / 1023.0) * 5.0 * 5; // adjust divider
+}
+
+float readCurrent() {
+  int raw = analogRead(CURRENT_PIN);
+  return (raw - 512) * (5.0 / 1023.0) / 0.066;
+}
+
+// ---------------- STATE LOGIC ----------------
+void updateState(float temp) {
+  switch (currentState) {
+
+    case NORMAL:
+      if (temp >= warningOn)
+        currentState = WARNING;
+      break;
+
+    case WARNING:
+      if (temp >= criticalOn)
+        currentState = CRITICAL;
+      else if (temp <= warningOff)
+        currentState = NORMAL;
+      break;
+
+    case CRITICAL:
+      if (temp <= criticalOff)
+        currentState = WARNING;
+      break;
+  }
+}
+
+// ---------------- CONTROL ----------------
+void handleState() {
+  switch (currentState) {
+
+    case NORMAL:
+      digitalWrite(RELAY_PIN, LOW);
+      digitalWrite(BUZZER_PIN, LOW);
+      digitalWrite(LED_PIN, LOW);
+      break;
+
+    case WARNING:
+      digitalWrite(RELAY_PIN, HIGH);
+      digitalWrite(LED_PIN, HIGH);
+      digitalWrite(BUZZER_PIN, LOW);
+      break;
+
+    case CRITICAL:
+      digitalWrite(RELAY_PIN, HIGH);
+      digitalWrite(LED_PIN, HIGH);
+      digitalWrite(BUZZER_PIN, HIGH);
+      break;
+  }
+}
+
+// ---------------- DISPLAY ----------------
+void displayData(float temp, float volt, float curr) {
+  lcd.clear();
+
+  lcd.setCursor(0, 0);
+  lcd.print("T:");
+  lcd.print(temp);
+  lcd.print(" V:");
+  lcd.print(volt);
+
+  lcd.setCursor(0, 1);
+  lcd.print("I:");
+  lcd.print(curr);
+}
+
+// ---------------- LOGGING ----------------
+void logData(float temp, float volt, float curr) {
+  Serial.print(temp);
+  Serial.print(",");
+  Serial.print(volt);
+  Serial.print(",");
+  Serial.println(curr);
+}
+
+// ---------------- FAULT ----------------
+void handleFault() {
+  digitalWrite(BUZZER_PIN, HIGH);
+  lcd.clear();
+  lcd.print("Sensor Error!");
+}
