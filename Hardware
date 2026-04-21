@@ -1,0 +1,24 @@
+# Hardware Details
+
+## Components Used
+- Arduino Uno
+- DHT11 Temperature Sensor
+- Voltage Sensor Module
+- Current Sensor (ACS712)
+- Relay Module (Fan control)
+- 16x2 LCD Display
+- Buzzer
+- LED
+- Resistors & Capacitors
+
+## Connections
+- DHT11 → Digital Pin 2
+- Voltage Sensor → A0
+- Current Sensor → A1
+- Relay → Pin 7
+- Buzzer → Pin 8
+- LED → Pin 9
+- LCD → Pins (12, 11, 5, 4, 3, 6)
+
+## Working Setup
+Sensors continuously monitor battery parameters and send data to Arduino, which processes and controls outputs.
