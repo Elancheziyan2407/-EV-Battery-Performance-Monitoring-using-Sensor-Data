@@ -1,55 +1,11 @@
-# Battery Management System - Test Cases
+| Test Case ID | Test Scenario                | Input Condition                         | Expected Output                                | Actual Output                  | Result |
+| ------------ | ---------------------------- | --------------------------------------- | ---------------------------------------------- | ------------------------------ | ------ |
+| TC_01        | Normal Voltage Operation     | Voltage within safe range (10V–12V)     | System operates normally, relay ON, buzzer OFF | System worked normally         | PASS   |
+| TC_02        | Under Voltage Condition      | Voltage below lower threshold           | Low voltage warning displayed                  | Warning displayed correctly    | PASS   |
+| TC_03        | Over Voltage Protection      | Voltage above upper threshold           | Relay OFF, buzzer ON                           | Protection activated correctly | PASS   |
+| TC_04        | Normal Temperature Check     | Temperature within safe range (25–40°C) | System operates normally                       | Normal operation observed      | PASS   |
+| TC_05        | Over Temperature Protection  | Temperature above threshold (50°C)      | Buzzer ON and alert triggered                  | Alert triggered successfully   | PASS   |
+| TC_06        | Current Monitoring           | Load connected to battery               | Current measured and displayed correctly       | Current displayed correctly    | PASS   |
+| TC_07        | Sensor Accuracy Verification | Apply known voltage/current values      | Sensor values within acceptable tolerance      | Accurate readings observed     | PASS   |
+| TC_08        | System Startup Test          | Power ON system                         | All modules initialize correctly               | Stable startup observed        | PASS   |
 
-## Test Case 1: Normal Voltage Operation
-Input: Voltage within safe range (10V–12V)  
-Expected Output: System operates normally, relay ON, buzzer OFF  
-Result: PASS  
-
----
-
-## Test Case 2: Under Voltage Condition
-Input: Voltage < lower threshold  
-Expected Output: System indicates low voltage condition  
-Result: PASS  
-
----
-
-## Test Case 3: Over Voltage Protection
-Input: Voltage > upper threshold  
-Expected Output: Relay OFF, buzzer ON  
-Result: PASS  
-
----
-
-## Test Case 4: Normal Temperature
-Input: Temperature within safe range (25–40°C)  
-Expected Output: Normal operation  
-Result: PASS  
-
----
-
-## Test Case 5: Over Temperature Protection
-Input: Temperature > threshold (e.g., 50°C)  
-Expected Output: Buzzer ON, system alert triggered  
-Result: PASS  
-
----
-
-## Test Case 6: Current Monitoring
-Input: Load connected  
-Expected Output: Current measured and displayed correctly  
-Result: PASS  
-
----
-
-## Test Case 7: Sensor Accuracy Check
-Input: Known voltage/current values  
-Expected Output: Sensor readings match expected values (within tolerance)  
-Result: PASS  
-
----
-
-## Test Case 8: System Startup Test
-Input: Power ON  
-Expected Output: All modules initialize correctly, stable readings observed  
-Result: PASS  
