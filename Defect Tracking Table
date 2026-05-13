@@ -1,0 +1,6 @@
+-Defect Tracking Table:
+
+| Defect ID | Issue               | Severity | Status |
+| --------- | ------------------- | -------- | ------ |
+| DEF_01    | Voltage fluctuation | High     | Fixed  |
+| DEF_02    | LCD delay           | Medium   | Fixed  |
