@@ -1,8 +1,7 @@
-## Testing & Validation
 
 ### Objective
 
-Validate battery monitoring functionality, overheating detection, and safety mechanisms through hardware testing and data analysis.
+Battery Monitoring functionality, overheating detection, and safety mechanisms through hardware testing and data analysis.
 
 ### Features
 
