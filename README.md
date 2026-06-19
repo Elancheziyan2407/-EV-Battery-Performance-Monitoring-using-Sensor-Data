@@ -1,86 +1,41 @@
+## Testing & Validation
+
 ### Objective
 
-The Battery Management System (BMS) was tested and validated to ensure accurate monitoring of battery parameters, reliable detection of abnormal conditions, and proper activation of safety mechanisms under different operating scenarios.
+Validate battery monitoring functionality, overheating detection, and safety mechanisms through hardware testing and data analysis.
 
-### Test Setup
+### Features
 
-- Arduino Uno
-- DHT11 Temperature Sensor
-- Voltage Sensor Module
-- Current Sensor Module
-- 16×2 LCD Display
-- Cooling Fan (via Relay/MOSFET)
-- Buzzer Alert System
-- 12V Lithium-ion Battery
+* Temperature monitoring validation
+* Voltage and current measurement validation
+* Cooling fan activation testing
+* Buzzer alert verification
+* LCD display validation
+* Safety threshold testing
+* Data logging and analysis
 
-### Functional Testing
+### Test Cases
 
-| Test Case | Expected Result | Status |
-|------------|----------------|---------|
-| Temperature Monitoring | Temperature displayed accurately on LCD | Passed |
-| Voltage Monitoring | Real-time voltage displayed correctly | Passed |
-| Current Monitoring | Real-time current displayed correctly | Passed |
-| LCD Display Update | Sensor values refreshed continuously | Passed |
-| Cooling Fan Control | Fan activated when temperature exceeded threshold | Passed |
-| Buzzer Alert | Buzzer activated during overheating condition | Passed |
-| System Recovery | Fan and buzzer deactivated after temperature normalized | Passed |
+* Normal Temperature Validation
+* Overheat Detection Validation
+* Cooling Fan Activation Validation
+* Buzzer Alert Validation
+* Voltage Monitoring Validation
+* Current Monitoring Validation
+* LCD Display Validation
+* System Recovery Validation
 
-### Safety Validation
+### Testing
 
-- Verified temperature threshold detection logic.
-- Confirmed automatic cooling fan activation during overheating conditions.
-- Validated buzzer alert generation for abnormal temperature levels.
-- Tested system recovery after temperature returned to a safe operating range.
+The system validates battery parameters by continuously monitoring temperature, voltage, and current values. When the temperature exceeds the predefined threshold, the cooling fan and buzzer are activated automatically. Test results are verified through hardware observation and recorded data analysis.
 
-### Sensor Validation
+### Results
 
-- Verified sensor readings against predefined test values.
-- Evaluated sensor response under varying temperature conditions.
-- Ensured stable and consistent measurements during continuous operation.
-
-### Boundary Testing
-
-| Parameter | Test Condition | Result |
-|------------|---------------|---------|
-| Temperature | Below Threshold | Normal Operation |
-| Temperature | At Threshold | Fan Activation Verified |
-| Temperature | Above Threshold | Fan and Buzzer Activated |
-| Voltage | Low Voltage Condition | Successfully Detected |
-| Current | High Current Condition | Successfully Monitored |
-
-### Integration Testing
-
-- Verified communication between sensors and Arduino Uno.
-- Confirmed correct LCD data display.
-- Validated interaction between temperature monitoring, cooling fan, and buzzer alert systems.
-- Ensured seamless operation of all hardware modules as a single integrated system.
-
-### Data Analysis & Validation
-
-- Generated simulated battery performance data at one-second intervals.
-- Logged temperature, voltage, and current readings.
-- Performed threshold-based anomaly detection.
-- Conducted temperature-current correlation analysis.
-- Visualized system behavior using Power BI and Excel dashboards.
-
-### Validation Results
-
-- Real-time battery parameter monitoring.
-- Reliable overheating detection and alert generation.
-- Successful activation of cooling mechanisms.
-- Stable system performance during continuous testing.
-- Effective safety response under abnormal operating conditions.
-
-### Testing Skills Demonstrated
-
-- Functional Testing
-- Hardware Validation
-- Sensor Verification
-- Boundary Value Testing
-- Safety Testing
-- Integration Testing
-- Embedded System Debugging
-- Root Cause Analysis
-- Data Validation
-- Test Documentation
-
+* Accurate temperature monitoring achieved
+* Reliable voltage and current measurements obtained
+* Automatic cooling fan activation verified
+* Overheating alert functionality validated
+* LCD display updated successfully in real time
+* Safety threshold detection implemented
+* Stable system operation achieved during testing
+* Data successfully analyzed using Power BI and Excel
